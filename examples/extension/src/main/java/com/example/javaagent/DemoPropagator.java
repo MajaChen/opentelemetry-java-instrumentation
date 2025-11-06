@@ -10,9 +10,9 @@ import io.opentelemetry.context.ContextKey;
 import io.opentelemetry.context.propagation.TextMapGetter;
 import io.opentelemetry.context.propagation.TextMapPropagator;
 import io.opentelemetry.context.propagation.TextMapSetter;
-import org.checkerframework.checker.nullness.qual.NonNull;
 import java.util.Arrays;
 import java.util.List;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 /**
  * See <a
@@ -25,8 +25,7 @@ import java.util.List;
 public class DemoPropagator implements TextMapPropagator {
   private static final String X_REQUEST_ID_FIELD = "x-request-id";
   private static final String X_OT_SPAN_CONTEXT_FIELD = "x-ot-span-context";
-  private static final ContextKey<String> REQUEST_ID_CONTEXT_KEY =
-      ContextKey.named("x.request.id");
+  private static final ContextKey<String> REQUEST_ID_CONTEXT_KEY = ContextKey.named("x.request.id");
   private static final ContextKey<String> OT_SPAN_CONTEXT_KEY =
       ContextKey.named("x.ot.span.context");
 
@@ -41,9 +40,13 @@ public class DemoPropagator implements TextMapPropagator {
     String otSpanContext = context.get(OT_SPAN_CONTEXT_KEY);
     if (requestId != null) {
       setter.set(carrier, X_REQUEST_ID_FIELD, requestId);
+    } else {
+      setter.set(carrier, X_REQUEST_ID_FIELD, "non-existent");
     }
     if (otSpanContext != null) {
       setter.set(carrier, X_OT_SPAN_CONTEXT_FIELD, otSpanContext);
+    } else {
+      setter.set(carrier, X_OT_SPAN_CONTEXT_FIELD, "non-existent");
     }
   }
 

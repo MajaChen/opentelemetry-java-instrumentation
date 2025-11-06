@@ -20,6 +20,10 @@ plugins {
 group 'io.opentelemetry.example'
 version '1.0'
 
+shadowJar {
+  mergeServiceFiles()
+}
+
 ext {
   versions = [
     // this line is managed by .github/scripts/update-sdk-version.sh
